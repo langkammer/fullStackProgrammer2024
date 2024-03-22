@@ -1,36 +1,32 @@
 # Etapa 1
 
-Nessa etapa será criado o desenho do projeto onde veremos ponto a ponto onde nos iremos atuar em cada etapa.
-
-
+Nesta etapa, será criado o desenho do projeto, onde veremos ponto a ponto onde iremos atuar em cada etapa.
 
 ## Desenho Geral do Projeto
 ![img.png](img.png)
 
-## Estrategia
-Como o desenho do projeto é gigante será dividido em x etapas, para que tais etapas seja feito sugiro que comece desenvolvendo as beiradas 
-ou as fronteiras do projeto e indo depois chegando mais dentro do coração do projeto abaixo listarei o que cada aplicação
-é responsavel
+## Estratégia
+Como o desenho do projeto é extenso, será dividido em várias etapas. Sugiro começar desenvolvendo as bordas ou fronteiras do projeto e gradualmente avançando para o centro do projeto. Abaixo listarei as responsabilidades de cada aplicação.
 
-Coração da ideia do projeto
-1) Incluir Pagamento Pix 
-    1. Irá receber uma requisição com o json 
-       2. [Link Do Contrato](etapa1_desenho_projeto/contratos/inclusao_pagamento_pix/contrato.json)
-       3. [Link do exemplo](etapa1_desenho_projeto/contratos/inclusao_pagamento_pix/exemplo.json)  
-       4. Tipos pagamentos chaves possiveis: 
-          5. email
-          6. chave_aleatoria
-          7. cpf 
-          8. telefone
-       10. Validações do contrato 
-           11. Ao Incluir Pagamento deverá validar se todos os atributos estão preenchidos
-           12. Data do pagamento deverá ser superior ou igual a data de atual
-           13. Valor do Pagamento deverá ser superior a ZERO
-       11. Procedimento :
-           12. Ao efetivar o Pagamento deverá receber o payload do contrato e consultar a agencia e conta origem na api item [nome_api_consulta]
-               13. ao enviar agencia e conta para essa api o retorno dela deverá ser [Link do exemplo](etapa1_desenho_projeto/contratos/consulta_conta_origem/exemplo.json)
-               14. Se houver retorno valido dessa api enriquecer os dados do dominio da aplicação para salvar caso não existe deverá ser negado a inclusão do pagamento
-           15. Consultar chave pix destino
-               16. ao consultar chave pix o retorno deve ser [Link do Contrato](etapa1_desenho_projeto/contratos/consulta_chave_pix/contrato.json)
-               17. Se houver retorno valido dessa api enriquecer os dados do dominio da aplicação para salvar caso não existe deverá ser negado a inclusão do pagamento
-           16. Depois será gravado na tabela do pagamentos_pix [Link da extrutura da tabela](etapa1_desenho_projeto/banco_dados/pagamentos_pix.json)
+### Coração da Ideia do Projeto
+1. Inclusão de Pagamento Pix
+    - Irá receber uma requisição com o JSON.
+    - [Link do Contrato](etapa1_desenho_projeto/contratos/inclusao_pagamento_pix/contrato.json)
+    - [Link do Exemplo](etapa1_desenho_projeto/contratos/inclusao_pagamento_pix/exemplo.json)
+    - Tipos de chaves de pagamento possíveis:
+        - email
+        - chave_aleatoria
+        - cpf
+        - telefone
+    - Validações do contrato:
+        - Ao incluir o pagamento, deverá validar se todos os atributos estão preenchidos.
+        - A data do pagamento deverá ser superior ou igual à data atual.
+        - O valor do pagamento deverá ser superior a ZERO.
+    - Procedimento:
+        - Ao efetivar o pagamento, deverá receber o payload do contrato e consultar a agência e a conta origem na API [nome_api_consulta].
+        - Ao enviar agência e conta para essa API, o retorno dela deverá ser [Link do Exemplo](etapa1_desenho_projeto/contratos/consulta_conta_origem/exemplo.json).
+        - Se houver retorno válido dessa API, enriquecer os dados do domínio da aplicação para salvar. Caso não exista, a inclusão do pagamento deverá ser negada.
+        - Consultar chave pix destino.
+        - Ao consultar chave pix, o retorno deve ser [Link do Contrato](etapa1_desenho_projeto/contratos/consulta_chave_pix/contrato.json).
+        - Se houver retorno válido dessa API, enriquecer os dados do domínio da aplicação para salvar. Caso não exista, a inclusão do pagamento deverá ser negada.
+        - Depois, será gravado na tabela de pagamentos_pix [Link da Estrutura da Tabela](etapa1_desenho_projeto/banco_dados/pagamentos_pix.json).
