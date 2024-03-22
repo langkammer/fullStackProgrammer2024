@@ -8,7 +8,18 @@ Nesta etapa, será criado o desenho do projeto, onde veremos ponto a ponto onde 
 ## Estratégia
 Como o desenho do projeto é extenso, será dividido em várias etapas. Sugiro começar desenvolvendo as bordas ou fronteiras do projeto e gradualmente avançando para o centro do projeto. Abaixo listarei as responsabilidades de cada aplicação.
 
+### Lista de Aplicações a serem criadas
+   - [Consulta Conta](#)
+   - [Consulta Chave Pix](#)
+   - [Api de Fraudes](#)
+   - [Api de Verifica Saldo e Bloqueia](#consulta-conta)
+   - [Api de Inclusão Pagamento](#inclusão-de-pagamento-pix)
+   - [Api de Autorização Pagamento](#autorizar-pagamento-pix)
+   - [Efetivação de Pagamento](#efetivar-pagamento-pix)
+
 ### Coração da Ideia do Projeto
+Desenvolver uma aplicação PIX pagamentos completa, desda inclusão autorização e efetivação do pagamento passando pelas etapas de consulta dados 
+pagamento e chaves de acesso e aplicações de consumo de mensageria.
 1. ### Inclusão de Pagamento Pix
     - Irá receber uma requisição do tipo POST com o JSON.
     - [Link do Contrato](contratos/inclusao_pagamento_pix/contrato.json)
@@ -70,9 +81,16 @@ Como o desenho do projeto é extenso, será dividido em várias etapas. Sugiro c
     - Essa api deverá consultar por agencia e conta nessa tabela 
     - e deverá retornar os dados informados no contrato
 
-4. ### Consulta Chave Pix
+5. ### Consulta Chave Pix
     - Essa api recebe via get chave e tipo de chave e devolve esse contrato [Link do Contrato](contratos/consulta_chave_pix/contrato.json).
     - Faça um tabela chamada chave_pix [Link da extrutura do banco de dados](banco_dados/dados_chave_pix.json).
+    - E pode fazer uma pequena massa de registros como preferir
+    - Essa api deverá consultar por chave e tipo de chave nessa tabela
+    - e deverá retornar os dados informados no contrato
+   
+6. ### Aplicação de leitura topico kafka fraude
+    - Essa Api é simples ela faz leitura do topico fraude-pix recebendo esses dados [Link do Contrato](contratos/fraude_validacao/contrato.json).
+    - Faça um tabela chamada fraude [Link da extrutura do banco de dados](banco_dados/dados_chave_pix.json).
     - E pode fazer uma pequena massa de registros como preferir
     - Essa api deverá consultar por chave e tipo de chave nessa tabela
     - e deverá retornar os dados informados no contrato
