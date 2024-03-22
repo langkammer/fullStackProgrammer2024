@@ -1,0 +1,14 @@
+{
+  "id_pagamento": "uuid string",
+  "nome_pagador_origem" : "string",
+  "agencia_origem" : "string",
+  "conta_origem" : "string",
+  "valor" : "string",
+  "data_inclusao" : "string",
+  "data_pagametno" : "string",
+  "tipo_chave" : "string",
+  "chave_pix" : "string",
+  "nome_conta_destino" : "string",
+  "banco_conta_destino" : "string",
+  "situacao_pagamento": "string"
+}

@@ -1,0 +1,6 @@
+{
+  "nome" : "string",
+  "situacao_conta": "string",
+  "agencia" : "string",
+  "conta" : "string"
+}

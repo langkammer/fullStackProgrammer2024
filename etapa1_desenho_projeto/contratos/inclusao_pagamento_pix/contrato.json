@@ -1,0 +1,8 @@
+{
+  "tipo_chave" : "string",
+  "valor" : "double",
+  "agencia_origem": "string",
+  "conta_origem" : "string",
+  "data_inclusao" : "string",
+  "data_pagametno" : "string"
+}
