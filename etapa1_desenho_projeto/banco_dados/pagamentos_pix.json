@@ -6,6 +6,7 @@
   "valor" : "string",
   "data_inclusao" : "string",
   "data_pagametno" : "string",
+  "data_autorizacao": "string",
   "tipo_chave" : "string",
   "chave_pix" : "string",
   "nome_conta_destino" : "string",

@@ -1,0 +1,8 @@
+{
+  "agencia" : "2050",
+  "conta" : "5020",
+  "valor" : 100.00,
+  "nome_banco": "string",
+  "agencia_destino": "3050",
+  "conta_destino": "5031"
+}

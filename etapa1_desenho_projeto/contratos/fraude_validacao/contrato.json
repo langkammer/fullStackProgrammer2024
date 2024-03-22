@@ -1,0 +1,8 @@
+{
+  "agencia" : "string",
+  "conta" : "string",
+  "valor" : "double",
+  "nome_banco": "string",
+  "agencia_destino": "string",
+  "conta_destino": "string"
+}

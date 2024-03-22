@@ -1,0 +1,6 @@
+{
+  "id_bloqueio" : "string uuid",
+  "valor" : "double",
+  "data_pagametno":  "string",
+  "tipo_efetivacao" : "string"
+}
