@@ -1,0 +1,7 @@
+{
+  "id_bloqueio" : "string",
+  "data_hora_bloqueio" : "string",
+  "valor" : "double",
+  "tem_saldo": "boolean",
+  "msg_bloqueio_saldo": "string"
+}

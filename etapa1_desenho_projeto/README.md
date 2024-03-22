@@ -45,11 +45,34 @@ Como o desenho do projeto é extenso, será dividido em várias etapas. Sugiro c
       - Valida se data do pagamento é maior que a data atual
    - Procedimento:
      - Produtor Msg Kafka
+     - Para toda msg enviada o cabecalho ou header das msgs kafka será eviado os seguintes argumentos
+       - chave_pix = vem da inclusão do pagamento
+       - id_pagamento_pix = uuid gerado na inclusão do pagametno
+       - tipo_pagamento = "pix"
+     - Envia primeiro para aplicação de fraude na fila mencionada e tendo retorno se é ou não fraude ele bloqueia saldo e com id do bloqueio ele efetiva transação na app de fetivacao
         - Envia Fraude de pix passando agencia e conta do pagador chave pix recebedor [Link do Contrato](contratos/fraude_validacao/contrato.json).
         - Envia Bloqueia Saldo [Link do Contrato](contratos/bloqueio_saldo/contrato.json).
         - Efetiva Pagamento Pix [Link do Contrato](contratos/efetivacao_sqs_pix/contrato.json).
      - Consumer Kafka
-       - Consome Retorno filtrando filtrando pelo tipo pagamento pix
-       - Consome Retorno de Bloqueio de Saldo
-       - Consome Retorno de da efetivação do pagaemtno
-       - Todos os consumidores deverão retornar um contrato 
+       - Filtrando msgs no header ou no cabecalho  tipo_pagamento = "pix"
+         - Consome Retorno de Fraudes [Link do Contrato](contratos/fraude_validacao/retorno_contrato.json).
+         - Consome Retorno de Bloqueio de Saldo [Link do Contrato](contratos/bloqueio_saldo/retorno_contrato.json).
+         - Consome Retorno de da efetivação do pagaemtno [Link do Contrato](contratos/efetivacao_pagamento_conta/retorno_contrato.json).
+     - Casos :
+       - Em caso de fraude gravar situacao do pix como suspeita_de_fraude 
+       - Em caso de bloqueio de saldo por falta de saldo ele gravará cliente_sem_saldo
+       - Em caso de erro na efetivação por falta gravará erro_na_efetivacao
+
+4. ### Consulta Conta
+    - Essa api recebe via get agencia e conta e devolve esse contrato [Link do Contrato](contratos/consulta_conta_origem/contrato.json). 
+    - Faça um tabela chamada dados_conta [Link da extrutura do banco de dados](banco_dados/dados_conta.json). 
+    - E pode fazer uma pequena massa de registros como preferir 
+    - Essa api deverá consultar por agencia e conta nessa tabela 
+    - e deverá retornar os dados informados no contrato
+
+4. ### Consulta Chave Pix
+    - Essa api recebe via get chave e tipo de chave e devolve esse contrato [Link do Contrato](contratos/consulta_chave_pix/contrato.json).
+    - Faça um tabela chamada chave_pix [Link da extrutura do banco de dados](banco_dados/dados_chave_pix.json).
+    - E pode fazer uma pequena massa de registros como preferir
+    - Essa api deverá consultar por chave e tipo de chave nessa tabela
+    - e deverá retornar os dados informados no contrato

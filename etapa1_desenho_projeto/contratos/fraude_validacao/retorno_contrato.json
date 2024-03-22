@@ -1,0 +1,5 @@
+{
+  "id_fraude" : "string uuid",
+  "bloqueado" : "boolean",
+  "msg": "string"
+}

@@ -1,0 +1,6 @@
+{
+  "nome": "uuid string",
+  "agencia" : "string",
+  "conta" : "string",
+  "situacao": "string"
+}
