@@ -1,4 +1,4 @@
 {
   "id_efetivacao_conta" : "string uuid",
-  "valor_efetivado" : "double",
+  "valor_efetivado" : "double"
 }

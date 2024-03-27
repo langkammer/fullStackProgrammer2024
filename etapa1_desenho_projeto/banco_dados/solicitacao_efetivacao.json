@@ -1,0 +1,8 @@
+{
+  "id_bloqueio": "uuid string",
+  "data_bloqueio": "datatime",
+  "id_transacao": "uuid string",
+  "data_sc_efetivacao": "datatime",
+  "data_efetivacao": "datatime",
+  "ativa": "boolean"
+}

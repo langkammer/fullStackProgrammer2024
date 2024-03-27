@@ -83,6 +83,33 @@ Desenvolver uma aplicação PIX pagamentos completa, desde a inclusão até a au
 6. ### Aplicação de leitura topico kafka fraude
     - Essa Api é simples ela faz leitura do topico fraude-pix recebendo esses dados [Link do Contrato](contratos/fraude_validacao/contrato.json).
     - Faça um tabela chamada fraude [Link da extrutura do banco de dados](banco_dados/dados_chave_pix.json).
+    - Os dados dessa tabela refere-se somente a suspeita de transações maliciosas
     - E pode fazer uma pequena massa de registros como preferir
     - Essa api deverá consultar por chave e tipo de chave nessa tabela
-    - e deverá retornar os dados informados no contrato
+    - caso exista fraude para os dados informados ela deverá processar a msg na fila e deverá devolver em outro topico de fraude-pix-devolutiva
+
+7. ### Aplicação de Consulta Saldo e Bloqueia
+    - Essa Api recebe um msg topico consulta-e-bloqueio-saldo-pix [Link do Contrato](contratos/bloqueio_saldo/contrato.json).
+    - Tabelas Envolvidas 
+      - Faça um tabela saldo_conta [Link da extrutura do banco de dados](banco_dados/saldo_conta.json).
+        - ela guarda o saldo da conta 
+      - Faça um tabela bloqueio_saldo_conta [Link da extrutura do banco de dados](banco_dados/bloqueio_saldo_conta.json)
+        - ela guarda bloqueios de saldo na conta para assegurar que tem saldo.
+      - Faça uma tabela de solicitacao_de_bloqueio_saldo_conta [Link da extrutura do banco de dados](banco_dados/solicitacao_de_bloqueio_saldo_conta.json)
+      - Faça uma tabela de solicitacao_efetivacao [Link da extrutura do banco de dados](banco_dados/solicitacao_efetivacao.json)
+    - Api tem 2 partes
+      - Consumer recebe a msg e cadastra a solicitação de bloqueio 
+      - Producer em tempo não sincrono ele processará o bloqueio na regra abaixo
+        - no cabeçalho da msg devolvida será enviado 2 parametros
+          - id da transacao para que a outra api filtre por ele
+          - tipo do pagamento para que api tbm saiba qual pagamento ela deseje filtrar
+    - Apos recepcionar e verificar se tem saldo na conta deverá em seguida se existe bloqueio ativo na tabela bloqueio_saldo_conta
+      se a totalidade do bloqueio em conta + o valor da transação for menor ou igual ao valor em saldo atual ele registra nova tranasação
+      de bloqueio em conta apos finalizar o processo de bloqueio ele devera gravar a solicitacao_efetivacao para proxima app rodar
+8. ### Efetivação de pagamentos bloqueados
+    - Essa Api efetiva pagamentos que estão bloqueados gravados na tabela solicitacao_efetivacao não temos um sistema de compenssação bancaria
+        então simplesmente se chegou até aqui vamos fazer x coisas 
+        - Atualiza dados tabela de bloqueio para ativo false
+        - Atualiza saldo da conta apos efetivacao reduzindo o valor bloquado do saldo da conta
+        - Atualiza solicitacao_efetivacao para ativa false data efetivacao
+        - Poste msg kafka na fila [Link do Contrato](contratos/efetivacao_pagamento_conta/retorno_contrato.json). com os dados de efetivacao

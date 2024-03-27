@@ -1,0 +1,8 @@
+{
+  "agencia": "uuid string",
+  "conta" : "string",
+  "saldo" : "double",
+  "id_bloqueio_sc": "uuid string",
+  "data_bloqueio": "datatime",
+  "id_transacao": "uuid string"
+}

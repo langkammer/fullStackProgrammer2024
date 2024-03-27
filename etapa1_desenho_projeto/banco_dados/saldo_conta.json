@@ -1,0 +1,7 @@
+{
+  "agencia": "uuid string",
+  "conta" : "string",
+  "saldo" : "double",
+  "data_hora_ultimo_debito": "datatime",
+  "data_hora_ultimo_credito": "datatime"
+}
